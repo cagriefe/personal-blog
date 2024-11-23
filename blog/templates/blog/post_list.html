@@ -1,15 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blog</title>
+    <title>My Blog</title>
     {% load static %}
     <link rel="stylesheet" type="text/css" href="{% static 'blog/styles.css' %}">
 </head>
+
 <body>
-    <h1 style="text-align: center;">Blog Posts</h1>
+    <nav>
+        <a href="#">My Blog Posts</a>
+        <a href="{% url 'admin:index' %}">Login</a>
+    </nav>
     <ul>
         {% for post in posts %}
             <li>
+                
+                <h2 href="{% url 'post_detail' post.pk %}">{{ post.title }}</h2>
                 {% if post.categories.all %}
                     <h3>Categories:
                         {% for category in post.categories.all %}
@@ -17,7 +23,6 @@
                         {% endfor %}
                     </h3>
                 {% endif %}
-                <a href="{% url 'post_detail' post.pk %}">{{ post.title }}</a>
                 <p>
                     {{ post.content|truncatechars:100 }}...
                     <a href="{% url 'post_detail' post.pk %}">Read more</a>

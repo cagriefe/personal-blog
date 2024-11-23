@@ -8,14 +8,20 @@
 <body>
     <h1>{{ post.title }}</h1>
     {% if post.categories.all %}
-        <h3>Categories:</h3>
+    <h3>Categories:
         {% for category in post.categories.all %}
-            <p>{{ category.name }}</p>
+            {{ category.name }}
         {% endfor %}
+    </h3>
     {% endif %}
+    <h3>Tag:
+        {% for tag in post.tags.all %}
+            {{ tag.name }}
+        {% endfor %}
+    </h3>
     <p>Created at: {{ post.created_at }}</p>
     <p>Updated at: {{ post.updated_at }}</p>
-    <p>{{ post.content }}</p>
+    <p class = "post-content">{{ post.content }}</p>
     <h2>Comments</h2>
     <ul>
         {% for comment in comments %}
